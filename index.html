@@ -55,11 +55,10 @@
   .cta-row{display:flex; flex-wrap:wrap; gap:14px;}
 
   .photo-wrap{
-    width:100%; display:flex; align-items:flex-end; justify-content:center;
-    overflow:hidden;
+    width:100%; display:flex; align-items:center; justify-content:center;
   }
   .photo-wrap img{
-    width:100%; height:auto; object-fit:contain; object-position:bottom;
+    width:100%; max-width:320px; height:auto; display:block; margin:0 auto;
   }
   .photo-placeholder{
     width:100%; aspect-ratio:1/1; max-width:300px; margin:0 auto;
@@ -129,8 +128,8 @@
     display:flex; justify-content:center; align-items:center; gap:60px; flex-wrap:wrap;
     max-width:1000px; margin:0 auto; padding:0 20px;
   }
-  .logo-row .brand{display:block; opacity:.7; filter:grayscale(1); transition:opacity .15s, filter .15s;}
-  .logo-row .brand:hover{opacity:1; filter:grayscale(0);}
+  .logo-row .brand{display:block; opacity:1; filter:grayscale(0); transition:opacity .15s, filter .15s;}
+  .logo-row .brand:hover{opacity:.85; filter:grayscale(1);}
   .logo-row .brand img{height:34px; width:auto; max-width:150px; object-fit:contain;}
 
   /* FOOTER */
@@ -151,15 +150,15 @@
   .footer-contact-line{display:flex; align-items:center; gap:8px; font-size:13px; color:#9a9ca6;}
   .footer-contact-line a{color:#9a9ca6;}
   .footer-contact-line a:hover{color:#fff;}
-  .icon-inline{width:16px; height:16px; display:block; filter:brightness(0) invert(1); opacity:.75;}
+  .icon-inline{width:16px; height:16px; display:block; opacity:.9;}
   .footer-social{display:flex; align-items:center; gap:14px;}
   .footer-social a{
     width:32px; height:32px; border-radius:50%; opacity:1;
     background:#1a1b22; display:flex; align-items:center; justify-content:center;
     transition:background .15s;
   }
-  .footer-social a:hover{background:#2a2c37;}
-  .footer-social img{width:16px; height:16px; filter:brightness(0) invert(1);}
+  .footer-social a:hover{transform:translateY(-2px); box-shadow:0 4px 10px rgba(0,0,0,.35);}
+  .footer-social img{width:18px; height:18px; border-radius:50%;}
   .footer-bottom{
     max-width:900px; margin:40px auto 0; padding-top:20px; border-top:1px solid #23252d;
     font-size:12px; color:#6d6f79; text-align:center;
@@ -194,6 +193,18 @@
     .nav{padding:22px;}
     .hero{padding:20px 22px 0;}
   }
+
+  /* SCROLL TO TOP BUTTON */
+  #scrollTopBtn{
+    position:fixed; right:24px; bottom:24px; width:48px; height:48px; border-radius:50%;
+    background:var(--blue); color:#fff; border:none; cursor:pointer;
+    display:none; align-items:center; justify-content:center;
+    box-shadow:0 4px 14px rgba(0,0,0,.25);
+    z-index:999; opacity:0; transition:opacity .25s, background .15s, transform .15s;
+  }
+  #scrollTopBtn.show{display:flex; opacity:1;}
+  #scrollTopBtn:hover{background:var(--blue-dark); transform:translateY(-2px);}
+  #scrollTopBtn svg{width:20px; height:20px;}
 </style>
 </head>
 <body>
@@ -221,7 +232,7 @@
         <a class="btn" href="https://drive.google.com/file/d/1bcfo3sMExGBsrG3ii0XzGO8KmKvhMqHJ/view?usp=sharing" target="_blank" rel="noopener">Resume</a>
       </div>
       <div class="photo-wrap">
-        <img src="assets/profile-photo.avif" alt="Yashon Manuvel">
+        <img src="assets/profile-photo.png" alt="Yashon Manuvel">
       </div>
     </div>
 
@@ -256,7 +267,7 @@
         </p>
         <div class="cta-row">
           <a class="btn-sm" href="victory-printers-case-study.html">Learn More</a>
-          <a class="btn-sm outline" href="https://victory-printers.web.app/" target="_blank" rel="noopener">Live Demo</a>
+          <a class="btn-sm outline" href="https://jyashonmanuvel-ctrl.github.io/Victoty-Case-Study-Demo/" target="_blank" rel="noopener">Live Demo</a>
         </div>
       </div>
       <div class="project-visual">
@@ -390,6 +401,19 @@
     document.addEventListener('keydown', function(e){
       if(e.key === 'Escape'){ document.getElementById('prototypeModal').classList.remove('open'); }
     });
+  </script>
+
+
+  <button id="scrollTopBtn" aria-label="Scroll to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+  </button>
+  <script>
+    (function(){
+      var btn = document.getElementById('scrollTopBtn');
+      window.addEventListener('scroll', function(){
+        if(window.scrollY > 400){ btn.classList.add('show'); } else { btn.classList.remove('show'); }
+      });
+    })();
   </script>
 
 </body>
