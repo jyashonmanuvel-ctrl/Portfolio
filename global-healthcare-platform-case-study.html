@@ -504,6 +504,28 @@
     color:var(--ink);
   }
   .link-chip:hover{ background:var(--ink); color:var(--paper); }
+  button.link-chip{
+    background:transparent; cursor:pointer; font-family:'Inter', sans-serif;
+    appearance:none; -webkit-appearance:none;
+  }
+
+  /* ---------- Prototype embed toggle ---------- */
+  .proto-embed-wrap{
+    margin-top:20px;
+    display:none;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    max-width:800px;
+    background:var(--paper-alt);
+  }
+  .proto-embed-wrap.show{ display:block; }
+  .proto-embed-wrap iframe{
+    width:100%;
+    aspect-ratio:800/450;
+    border:none;
+    display:block;
+  }
 
   /* ---------- Learnings ---------- */
   .learn-list{
@@ -812,6 +834,11 @@
       <img src="assets/global-healthcare-3.png" alt="Appointment Management — Status Board">
       <figcaption class="cap mono">UI Screen — Kanban Appointment Status Board</figcaption>
     </figure>
+
+    <button class="link-chip" type="button" id="ghpProtoBtn" onclick="toggleProtoEmbed('ghpProtoBtn','ghpProtoEmbed')">▶ Click for Prototype</button>
+    <div class="proto-embed-wrap" id="ghpProtoEmbed">
+      <iframe data-src="https://embed.figma.com/proto/cC8zvfHrH6eBPK7WbWcmRN/Global-Healthcare-Platform-Appointment-management?node-id=8-3780&amp;p=f&amp;scaling=contain&amp;content-scaling=fixed&amp;page-id=0%3A1&amp;starting-point-node-id=8%3A3780&amp;embed-host=share" allowfullscreen title="Global Healthcare Platform prototype"></iframe>
+    </div>
   </div>
 </section>
 
@@ -878,7 +905,7 @@
         <h4>Pages</h4>
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a href="https://drive.google.com/file/d/1bcfo3sMExGBsrG3ii0XzGO8KmKvhMqHJ/view?usp=sharing" target="_blank" rel="noopener">Resume</a></li>
+          <li><a href="resume.html">Resume</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
@@ -914,6 +941,23 @@
         if(window.scrollY > 400){ btn.classList.add('show'); } else { btn.classList.remove('show'); }
       });
     })();
+  </script>
+
+
+  <script>
+    function toggleProtoEmbed(btnId, wrapId){
+      var btn = document.getElementById(btnId);
+      var wrap = document.getElementById(wrapId);
+      var iframe = wrap.querySelector('iframe');
+      if(!wrap.classList.contains('show')){
+        if(!iframe.src || iframe.src === 'about:blank'){ iframe.src = iframe.getAttribute('data-src'); }
+        wrap.classList.add('show');
+        btn.textContent = '\u25B2 Hide Prototype';
+      } else {
+        wrap.classList.remove('show');
+        btn.textContent = '\u25B6 Click for Prototype';
+      }
+    }
   </script>
 
 </body>
